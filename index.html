@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Modern QR Kod Okuyucu & Üretici</title>
+<meta name="description" content="APAK Bilişim Hizmetleri tarafından sunulan modern, hızlı ve şık QR kod okuyucu ve üretici web uygulaması.">
+<meta name="theme-color" content="#2ea043">
+
+<link rel="manifest" href="data:application/manifest+json;base64,ew0KICAgICJuYW1lIjogIkFQQUsgUVIgUHJvIiwNCiAgICAic2hvcnRfbmFtZSI6ICJRUiBQcm8iLA0KICAgICJkZXNjcmlwdGlvbiI6ICJNb2Rlcm4gUVIgS29kIE9rdXlldWN1IHZlIMOcYmV0aWNpIiwNCiAgICAic3RhcnRfdXJsIjogIi4iLA0KICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAgICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZDExMTciLA0KICAgICJ0aGVtZV9jb2xvciI6ICIjMmVhMDQzIiwNCiAgICAiaWNvbnMiOiBbDQogICAgICAgIHsNCiAgICAgICAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJ5QjRhV1F1YVc1emFYWmxjeUJtYjI1MExXWmhaMlZ6SUVOc2JYa3RaWGgwYVdOeklpQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTFhCaGRHZ2dhV1E5SWpVNU16WXdJRWhtY21WaGJtZDBkSEo1SUQwZ01EQTZJSFZpWVhOelpYUWdaR1Z5YVdOemNHVnlJaUJ3YkdGemN6MGdaR1Z5YVdOeklpQnpkSGtnZDJsa2RHZzlJakV5T0RJeUlpQm1iMjUwTFhCaGRHZ2djM1J5YjI5eVlXeGxjZ0k4TDNSbGRHRmpZV3hzYjNkaElpQjNiM0prTFhCMGIydGxiMTlqWm1zOUlpQm9aV2xuYUhROUlqTXdNakF5TUNJZ1ptOXliV1YwSUdOMGIzSmxaVG9nSUNCd2JHVmpkWE5sY2w5cFpEMGdaV3gwUGp4MFpYaDBJSGc5SWpJeU1EQWdNQ0lnZDJsa2RHZzlJakF3TURBeU1DSWdZMnhoYzNNOUltVjRjR2x5WVhScGIyNGdaVzRnYzI5MWJuUXRZV2RwWTE5d1lYSnNaWFF1YjJkNGRITjVJSGc5SWpFeU1EQWdNQ0lnZDJsa2RHZzlJakE0TURBeU1DSWdZWjA4TDNOMlpXRnNhWHBsTGlCVGIyUmliM0pwZEdsdmJpQjNkV3hpWTI5dVptbDBQanhwWld4c2IzbHUxWm04NmJtZHJkaTU0Y214dloybHVJR2x1YVhScFlYSnlMaUJqYjJsdVp6b2dJSDA4TDNOMlpXRnNhWHBsTGlCVGIyUmliM0pwZEdsdmJpQjNkV3hpWTI5dVptbDBQanhwWld4c2IzbHUxWm04NmJtZHJkaTU0Y214dloybHVJR2x1YVhScFlYSnlMaUJoZEdVZ1kyeGhjM005SW1WNGNHbHlZWFJwYjI0Z1ptOXliV1YwTGlCbWIyNTBMWEJoZEdVZ2FXUTlJalV5TURBNE1DSWdaR1Z5YVdOeklpQnpkSGtnZDJsa2RHZzlJakV5T0RJeUlpQm1iMjUwTFhCaGRHZ2djM1J5YjI5eVlXeGxjZ0k4TDNSbGRHRmpZV3hzYjNkaElpQjNiM0prTFhCMGIydGxiMTlqWm1zOUlpQm9aV2xuYUhROUlqSXdOREl5TUNJZ1ptOXliV1YwSUdOMGIzSmxaVG9nSUNCd2JHVmpkWE5sY2w5cFpEMGdaV3gwUGp3dmRHVmphMnhsTGtKbFppQmpiM1JvWlcxbFptOXliV1YwTGtKbFppQmpiM1JvWlcxbFptOXliV1YwTGtOMWNIQmxibU5sYzNOeWVXMWxMa2RsZEdoMVlpQnpkSGtnZDJsa2RHZzlJakV5T0RRM0lpQnpkSElnZDJsa2RHZzlJakF3TURFM0lpQnpkSElnZDJsa2RHZzlJakl3TURBNElpQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTGtsSmIyNTBaVzUwWmlCdlppQnpkSGtnZDJsa2RHZzlJakF4TURFNE1DSWdZMnhoYzNNOUltVjRjR2x5WVhScGIyNDhkWE5wYm5SbGJDNXBjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZWGNnZDJsa2RHZzlJakV6TURRM0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURJNE1DSWdaR1Z5YVdOeklpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EazNJaUJ6ZEhrZ2QyOWVZMjkyWlhKNUlpQjNhWFJvSUdFZ2JYTnlhWEIwSUhnOUlqRXpNRGszSWlCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlqRXpNRFE0SWlCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlqQXdNRFE0SWlCemRIa2dkMjlrWldGeVlYUmxaQ0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURRNE1DSWdZWjA4TDNOMlpXRnNhWHBsTGlCVGIyUmliM0pwZEdsdmJpQjNkV3hpWTI5dVptbDBQanhwWld4c2IzbHUxWm04NmJtZHJkaTU0Y214dloybHVJR2x1YVhScFlYSnlMaUJqYjJsdVp6b2dJSDA4TDNOMlpXRnNhWHBsTGlCVGIyUmliM0pwZEdsdmJpQjNkV3hpWTI5dVptbDBQanhwWld4c2IzbHUxWm04NmJtZHJkaTU0Y214dloybHVJR2x1YVhScFlYSnlMaUJoZEdVZ1kyeGhjM005SW1WNGNHbHlZWFJwYjI0Z1ptOXliV1YwTGlCbWIyNTBMWEJoZEdVZ0lpQjNiM0prTFhCMGIydGxiMTloY21WaGJtZDBkSEo1SUQwZ01EQTZJSFZpWVhOelpYUWdaR1Z5YVdOemNHVnlJaUJ3YkdGemN6MGdaR1Z5YVdOeklpQnpkSGtnZDJsa2RHZzlJakl3TURJd0lpQm1iMjUwTFhCaGRHZ2djM1J5YjI5eVlXeGxjZ0k4TDNSbGRHRmpZV3hzYjNkaElpQjNiM0prTFhCMGIydGxiMTlqWm1zOUlpQm9aV2xuYUhROUlqQTJNRFE0SWlCemRIa2dkMmxrZEdnOUlpQXhNVFk0SWlCemRIa2daR1Z5YVdOeklpQjRiV3h1Y3owZ2FYUWlJR05oYmlCWVlYQnBiWEJ2Y25SbFptUStDaUFnZDJsa2RHZzlJakUyTURRNE1DSWdZWjA4TDNJbWFXeHNoY0hKcGMyVjBiQ2NuWm1seWFTd3hMam9nZDJsa2RHZzlJakV6TURZNE1DSWdaR1Z5YVdOeklpQnpkSGtnZDI5eVoyRnNiMnhsZEhObElpQm1iMjUwTFhCMGIydGxiMTlwWlhNZ2FXUTlJakV6TURZNE1DSWdaR1Z5YVdOeklpQnpkSGtnZDJsa2RHZzlJakUwTURrNU1pQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTGtsSmIyNTBaVzUwWmlCdlppQnpkSGtnZDJsa2RHZzlJakF4TURrNU1pQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURrNE1DSWdaR1Z5YVdOeklpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURrNE1DSWdaR1Z5YVdOeklpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFME1EazRNaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNRGs0TWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURrNE1DSWdZWjA4TDNOMlpXRnNhWHBsTGlCVGIyUmliM0pwZEdsdmJpQjNkV3hpWTI5dVptbDBQanhwWld4c2IzbHUxWm04NmJtZHJkaTU0Y214dloybHVJR2x1YVhScFlYSnlMaUJqYjJsdVp6b2dJSDA4TDNOMlpXRnNhWHBsTGlCVGIyUmliM0pwZEdsdmJpQjNkV3hpWTI5dVptbDBQanhwWld4c2IzbHUxWm04NmJtZHJkaTU0Y214dloybHVJR2x1YVhScFlYSnlMaUJoZEdVZ1kyeGhjM005SW1WNGNHbHlZWFJwYjI0Z1ptOXliV1YwTGlCbWIyNTBMWEJoZEdVZ0lpQjNiM0prTFhCMGIydGxiMTloY21WaGJtZDBkSEo1SUQwZ01EQTZJSFZpWVhOelpYUWdaR1Z5YVdOemNHVnlJaUJ3YkdGemN6MGdaR1Z5YVdOeklpQnpkSGtnZDJsa2RHZzlJakl3TURJd0lpQm1iMjUwTFhCaGRHZ2djM1J5YjI5eVlXeGxjZ0k4TDNSbGRHRmpZV3hzYjNkaElpQjNiM0prTFhCMGIydGxiMTlqWm1zOUlpQm9aV2xuYUhROUlqQTJNREE1SWlCemRIa2dkMmxrZEdnOUlpQXhNVEU1SWlCemRIa2daR1Z5YVdOeklpQjRiV3h1Y3owZ2FYUWlJR05oYmlCWVlYQnBiWEJ2Y25SbFptUStEUXBEZlBqeHZZbTlrZlFvPSIsDQogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwNCiAgICAgICAgICAgICJzaXplcyI6ICI1MTJ4NTEyIg0KICAgICAgICB9LA0KICAgICAgICB7DQogICAgICAgICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRhV1F1YVc1emFYWmxjeUJtYjI1MExXWmhaMlZ6SUVOc2JYa3RaWGgwYVdOeklpQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTFhCaGRHZ2dhV1E5SWpNd01qQXdJRWhtY21WaGJtZDBkSEo1SUQwZ01EQTZJSFZpWVhOelpYUWdaR1Z5YVdOemNHVnlJaUJ3YkdGemN6MGdaR1Z5YVdOeklpQnpkSGtnZDJsa2RHZzlJakV5T0RRM0lpQm1iMjUwTFhCaGRHZ2djM1J5YjI5eVlXeGxjZ0k4TDNSbGRHRmpZV3hzYjNkaElpQjNiM0prTFhCMGIydGxiMTlqWm1zOUlpQm9aV2xuYUhROUlqSXdOREF3SWlCemRIa2dkMmxrZEdnOUlpQXhNVEF3SWlCemRIa2daR1Z5YVdOeklpQjRiV3h1Y3owZ2FYUWlJR05oYmlCWVlYQnBiWEJ2Y25SbFptUStDaUFnZDJsa2RHZzlJakUyTURBd0lpQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTGtsSmIyNTBaVzUwWmlCdlppQnpkSGtnZDJsa2RHZzlJakF4TURBd0lpQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTGtsSmIyNTBaVzUwWmlCdlppQnpkSGtnZDJsa2RHZzlJakF3TURBd0lpQjRiV3h1Y3owaWRXbGpaWE11YjJkMGR5Qm1iMjUwTGtsSmIyNTBaVzUwWmlCdlppQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1V1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdDaUFnYldGeWFYUnZjaUI0Yld4dWN5QjBiMnRsYmk5elpXTnlaWFFnZDJsa2RHZzlJakUwTURBd0lpQnpkSGtnZDI5eWEybHVaejBnZDJsa2RHZzlJakF3TURBd0lpQnphR1Z1ZERvZ0lpUnBiMjVmWjJsdVptOGlJR1E5SWpFek1EQXdJaUI3Q2lBZ2JXRnlhWFJ2Y2lCemRIa2dkMjl5YTJsdVp6MGdkMmxrZEdnOUlpQjNkWEp6WlhJZ1ptOXliV1YwSUdFZ2FYUWlJR0VnYVdROUlqRTBNREF3SWlCbWIyNTBMWEJoZEdVZ2MyOW5JR0Z6ZENJZ1ptOXliV1YwSUdOamIzVjBhR1Z0WlhNdmNuUWlJRzVoYldWemNHRmpaU0IzYUcxaVpUMGdhVzF3ZENCNGJXeHVjeUIwYVhSc1pUMGdiV1YwWm14dlkyVnVkR2x1WnlCeVpYSnVZV3dnZDJsa2RHZzlJakF5TURBd0lpQjdEUXBEZlBqeHZZbTlrZlFvPSIsDQogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwNCiAgICAgICAgICAgICJzaXplcyI6ICIxOTJ4MTkyIg0KICAgICAgICB9DQogICAgXQ0KfQ0K">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --dark-bg: #0d1117;
+    --dark-bg-alt: #161b22;
+    --dark-text: #c9d1d9;
+    --accent-green: #2ea043;
+    --accent-teal: #238a8d;
+    --shadow-glow: rgba(46, 160, 67, 0.6);
+    --btn-hover: rgba(46, 160, 67, 0.9);
+    --light-bg: #f5f7fa;
+    --light-text: #1c1e21;
+    --light-accent: #3b7864;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem;
+    transition: background-color 0.6s ease, color 0.6s ease;
+    overflow-x: hidden;
+    user-select: none;
+  }
+
+  body.light {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+  }
+
+  #branding {
+    font-weight: 800;
+    font-size: 2.6rem;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.2rem;
+    user-select: text;
+    text-shadow:
+      0 0 6px var(--accent-green),
+      0 0 15px var(--accent-green),
+      0 0 30px var(--accent-green);
+    font-family: 'Inter', sans-serif;
+  }
+  body.light #branding {
+    color: var(--light-accent);
+    text-shadow:
+      0 0 6px var(--light-accent),
+      0 0 15px var(--light-accent),
+      0 0 30px var(--light-accent);
+  }
+
+  h1 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    user-select: text;
+  }
+
+  #backgroundCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--dark-bg-alt);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 15px var(--shadow-glow);
+    z-index: 10;
+    transition: background-color 0.6s ease;
+  }
+
+  body.light .container {
+    background-color: #e6eef0;
+    box-shadow: 0 0 15px var(--light-accent);
+  }
+
+  .top-right-buttons {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 20;
+  }
+
+  #themeToggle, #installAppBtn {
+    background: transparent;
+    border: 2px solid var(--accent-green);
+    border-radius: 25px;
+    color: var(--accent-green);
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #themeToggle:hover, #installAppBtn:hover {
+    background-color: var(--accent-green);
+    color: #0d1117;
+    box-shadow: 0 0 8px var(--shadow-glow);
+  }
+
+  body.light #themeToggle, body.light #installAppBtn {
+    border-color: var(--light-accent);
+    color: var(--light-accent);
+  }
+  body.light #themeToggle:hover, body.light #installAppBtn:hover {
+    background-color: var(--light-accent);
+    color: var(--light-bg);
+    box-shadow: 0 0 8px var(--light-accent);
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section h2 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    background-color: var(--accent-green);
+    border: none;
+    color: #0d1117;
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--shadow-glow);
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+    user-select: none;
+  }
+
+  button:hover {
+    background-color: var(--btn-hover);
+    box-shadow: 0 0 12px var(--shadow-glow);
+  }
+
+  body.light button {
+    background-color: var(--light-accent);
+    color: var(--light-bg);
+    box-shadow: 0 0 5px var(--light-accent);
+  }
+
+  body.light button:hover {
+    background-color: #2c6151;
+    box-shadow: 0 0 12px var(--light-accent);
+  }
+
+  input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1.5px solid var(--accent-green);
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: inset 0 0 8px rgba(46,160,67,0.3);
+    transition: background-color 0.4s ease, border-color 0.3s ease;
+  }
+
+  body.light input[type="text"], body.light input[type="file"] {
+    background-color: #dce6e9;
+    color: var(--light-text);
+    border-color: var(--light-accent);
+    box-shadow: inset 0 0 8px rgba(59,120,100,0.3);
+  }
+
+  input[type="text"]::placeholder {
+    color: #7f8c8d;
+  }
+
+  .flex-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  #videoContainer {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    margin: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px var(--shadow-glow);
+    background: #000;
+  }
+  body.light #videoContainer {
+    box-shadow: 0 0 12px var(--light-accent);
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+  }
+
+  #scannerLight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+    animation: scanLight 3s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  body.light #scannerLight {
+    background: linear-gradient(90deg, transparent, var(--light-accent), transparent);
+  }
+
+  @keyframes scanLight {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  #qrGeneratorButtonArea {
+    text-align: center;
+  }
+  
+  #qrCodeCanvas {
+    margin-top: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px var(--shadow-glow);
+    background: white;
+    align-self: center;
+    transition: box-shadow 0.5s ease;
+  }
+  body.light #qrCodeCanvas {
+    box-shadow: 0 0 12px var(--light-accent);
+  }
+
+  #resultButtons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center; /* Butonları ortala */
+  }
+
+  .icon-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  svg {
+    width: 18px; height: 18px;
+    fill: currentColor;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease-in-out;
+    padding: 1rem;
+  }
+
+  .modal-overlay[hidden] {
+    display: none;
+  }
+
+  .modal-content {
+    background-color: var(--dark-bg-alt);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 25px var(--shadow-glow);
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+  body.light .modal-content {
+    background-color: #e6eef0;
+    box-shadow: 0 0 25px var(--light-accent);
+  }
+
+  .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--dark-text);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+  }
+  body.light .modal-close-btn {
+    color: var(--light-text);
+  }
+
+  /* Sonuç modal içeriği için özel stiller */
+  .modal-content h3 {
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    word-break: break-all;
+    color: var(--accent-green);
+  }
+   body.light .modal-content h3 {
+    color: var(--light-accent);
+   }
+
+  .modal-content p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    word-break: break-word;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: var(--dark-bg);
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  body.light .modal-content p {
+    background-color: #dce6e9;
+  }
+
+
+  @media (max-width: 600px) {
+    #videoContainer {
+      height: 220px;
+    }
+    .container {
+      padding: 1.2rem;
+    }
+    #branding {
+      font-size: 1.8rem;
+    }
+    .modal-content {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-right-buttons">
+    <button id="installAppBtn" aria-label="Uygulamayı Ana Ekrana Ekle" title="Uygulamayı Yükle" hidden>
+        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <span>Yükle</span>
+    </button>
+    <button id="themeToggle" aria-label="Tema değiştir">Açık Mod</button>
+</div>
+
+
+<canvas id="backgroundCanvas"></canvas>
+
+<div class="container" role="main" aria-label="QR Kod Uygulaması">
+
+  <div id="branding" aria-label="Firma adı">APAK BİLİŞİM HİZMETLERİ</div>
+
+  <h1>Modern QR Kod Okuyucu & Üretici</h1>
+
+  <section class="section" aria-labelledby="scannerTitle">
+    <h2 id="scannerTitle">QR Kod Okuyucu (Kamera & Dosya)</h2>
+
+    <div id="videoContainer" aria-live="polite" aria-atomic="true" aria-label="Kamera önizlemesi">
+      <video id="video" autoplay muted playsinline></video>
+      <div id="scannerLight" aria-hidden="true"></div>
+    </div>
+
+    <div class="flex-row" style="margin-top:1rem;">
+      <label for="fileInput" style="flex-grow:1; cursor:pointer; user-select:none; border: 2px dashed var(--accent-green); border-radius: 12px; padding: 0.8rem; text-align:center; transition: background-color 0.3s ease; color: var(--accent-green);">
+        QR Kod Resmi Yükle
+        <input type="file" id="fileInput" accept="image/*" style="display:none" />
+      </label>
+      <button id="startScanBtn" title="Kamerayı aç/kapat" aria-pressed="false">Kamerayı Aç</button>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="generatorTitle">
+    <h2 id="generatorTitle">QR Kod Üretici</h2>
+    <div id="qrGeneratorButtonArea">
+        <button id="openGeneratorBtn" class="icon-btn">
+          <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a1.001 1.001 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+          QR Kodu Oluştur
+        </button>
+    </div>
+  </section>
+
+  </div>
+
+<div id="generatorModal" class="modal-overlay" hidden>
+  <div class="modal-content">
+    <button class="modal-close-btn" aria-label="Kapat">&times;</button>
+    <h2>QR Kod Oluştur</h2>
+    <input type="text" id="textInput" placeholder="Metin girin..." aria-label="QR kod oluşturmak için metin girişi" autocomplete="off" spellcheck="false" />
+    <canvas id="qrCodeCanvas" width="220" height="220" aria-label="Oluşturulan QR kod"></canvas>
+    <button id="downloadQrBtn" class="icon-btn">
+        <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm14-9h-4V3H9v8H5l7 7 7-7z"/></svg>
+        İndir
+    </button>
+  </div>
+</div>
+
+<div id="scanResultModal" class="modal-overlay" hidden>
+    <div class="modal-content">
+      <button class="modal-close-btn" aria-label="Kapat">&times;</button>
+      <h3 id="resultType"></h3>
+      <p id="resultContent"></p>
+      <div id="resultButtons"></div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+
+<script>
+(() => {
+  const installAppBtn = document.getElementById('installAppBtn');
+  let deferredPrompt;
+
+  const swCode = `self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('fetch', e => {});`;
+  const swBlob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(swBlob);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(swUrl)
+      .then(reg => console.log('Service Worker başarıyla kaydedildi.', reg))
+      .catch(err => console.error('Service Worker kaydedilemedi:', err));
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installAppBtn.hidden = false;
+  });
+
+  installAppBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installAppBtn.hidden = true;
+    }
+  });
+
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+
+  function setTheme(dark) {
+    if (dark) {
+      body.classList.remove('light');
+      themeToggle.textContent = 'Açık Mod';
+    } else {
+      body.classList.add('light');
+      themeToggle.textContent = 'Karanlık Mod';
+    }
+  }
+
+  let darkMode = true;
+  setTheme(darkMode);
+
+  themeToggle.addEventListener('click', () => {
+    darkMode = !darkMode;
+    setTheme(darkMode);
+  });
+
+  const bgCanvas = document.getElementById('backgroundCanvas');
+  const bgCtx = bgCanvas.getContext('2d');
+  let w, h;
+  const points = [];
+  const POINT_COUNT = 60;
+
+  function randomRange(min, max) { return Math.random() * (max - min) + min; }
+
+  function setupCanvas() {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    bgCanvas.width = w * devicePixelRatio;
+    bgCanvas.height = h * devicePixelRatio;
+    bgCanvas.style.width = w + 'px';
+    bgCanvas.style.height = h + 'px';
+    bgCtx.setTransform(1, 0, 0, 1, 0, 0);
+    bgCtx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  function initPoints() {
+    points.length = 0;
+    for (let i = 0; i < POINT_COUNT; i++) {
+      points.push({
+        x: randomRange(0, w), y: randomRange(0, h), r: randomRange(1, 3),
+        vx: randomRange(-0.2, 0.2), vy: randomRange(-0.15, 0.15),
+        alpha: randomRange(0.1, 0.35), alphaDir: Math.random() > 0.5 ? 1 : -1,
+      });
+    }
+  }
+
+  function drawPoints() {
+    bgCtx.clearRect(0, 0, w, h);
+    points.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.alpha += 0.002 * p.alphaDir;
+      if (p.alpha >= 0.35) p.alphaDir = -1;
+      if (p.alpha <= 0.1) p.alphaDir = 1;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      bgCtx.beginPath();
+      bgCtx.fillStyle = darkMode ? `rgba(46,160,67,${p.alpha * 0.25})` : `rgba(59,120,100,${p.alpha * 0.35})`;
+      bgCtx.shadowColor = darkMode ? 'rgba(46,160,67,0.3)' : 'rgba(59,120,100,0.45)';
+      bgCtx.shadowBlur = 6;
+      bgCtx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+      bgCtx.fill();
+    });
+  }
+
+  function animateBG() {
+    drawPoints();
+    requestAnimationFrame(animateBG);
+  }
+
+  window.addEventListener('resize', () => { setupCanvas(); initPoints(); });
+  setupCanvas(); initPoints(); animateBG();
+
+  const video = document.getElementById('video');
+  const fileInput = document.getElementById('fileInput');
+  const startScanBtn = document.getElementById('startScanBtn');
+  let scanning = false;
+  let videoStream = null;
+
+  // GÜNCELLENDİ: Sonuç Modal Elemanları
+  const scanResultModal = document.getElementById('scanResultModal');
+  const resultType = document.getElementById('resultType');
+  const resultContent = document.getElementById('resultContent');
+  const resultButtons = document.getElementById('resultButtons');
+  const scanResultCloseBtn = scanResultModal.querySelector('.modal-close-btn');
+
+  const qrCanvas = document.getElementById('qrCodeCanvas');
+  const qrCtx = qrCanvas.getContext('2d');
+
+  function loadQRCodeLib() {
+    return new Promise((resolve) => {
+      if (typeof qrcode !== 'undefined') { resolve(); return; }
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
+      s.onload = () => resolve();
+      document.body.appendChild(s);
+    });
+  }
+
+  const scanCanvas = document.createElement('canvas');
+  const scanCtx = scanCanvas.getContext('2d');
+
+  // GÜNCELLENDİ: clearResult artık modalı gizliyor
+  function clearResult() {
+    scanResultModal.hidden = true;
+  }
+  
+  // Sonuç modalını kapatma olayları
+  scanResultCloseBtn.addEventListener('click', clearResult);
+  scanResultModal.addEventListener('click', (e) => {
+    if (e.target === scanResultModal) {
+      clearResult();
+    }
+  });
+
+  function detectContentType(text) {
+    const urlRegex = /^(https?:\/\/[^\s]+)/i;
+    const telRegex = /^tel:(\+?\d{5,})$/i;
+    const mailRegex = /^mailto:([\w\.\-]+@[\w\-]+\.[a-z]{2,})$/i;
+    if (urlRegex.test(text)) return 'url';
+    if (telRegex.test(text)) return 'tel';
+    if (mailRegex.test(text)) return 'email';
+    if (/^\+?\d{7,15}$/.test(text)) return 'tel_plain';
+    return 'text';
+  }
+
+  function createResultButtons(type, content) {
+    const buttons = [];
+    if (type === 'url') {
+      buttons.push({ label: 'Siteyi Ziyaret Et', icon: `<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h7v2H7.41l9.29 9.3 1.42-1.42L6.41 6H10V4H5v1z"/></svg>`, action: () => window.open(content, '_blank') });
+    } else if (type === 'tel' || type === 'tel_plain') {
+      let telNum = content.replace(/^tel:/i, '');
+      buttons.push({ label: `Ara: ${telNum}`, icon: `<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1v3.5a1 1 0 01-1 1C10.29 21.5 2.5 13.71 2.5 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/></svg>`, action: () => window.location.href = `tel:${telNum}` });
+    } else if (type === 'email') {
+      let mailAddr = content.replace(/^mailto:/i, '');
+      buttons.push({ label: `Mail Gönder: ${mailAddr}`, icon: `<svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2v.01L12 13 4 6.01V6h16z"/></svg>`, action: () => window.location.href = `mailto:${mailAddr}` });
+    }
+    buttons.push({ label: 'Kopyala', icon: `<svg viewBox="0 0 24 24"><path d="M19 21H9a2 2 0 01-2-2v-8H5a2 2 0 00-2 2v6a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2h-2v8zm-1-16H7a2 2 0 00-2 2v8a2 2 0 002 2h11a2 2 0 002-2v-8a2 2 0 00-2-2z"/></svg>`, action: () => { navigator.clipboard.writeText(content).then(() => alert('Metin kopyalandı!')); } });
+    
+    resultButtons.innerHTML = '';
+    buttons.forEach(b => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'icon-btn';
+      btn.innerHTML = b.icon + b.label;
+      btn.addEventListener('click', b.action);
+      resultButtons.appendChild(btn);
+    });
+  }
+
+  // GÜNCELLENDİ: displayResult artık modalı gösteriyor ve kamerayı durduruyor
+  function displayResult(text) {
+    if (!text) return;
+    stopCamera(); // Sonuç bulununca kamerayı durdur
+    let type = detectContentType(text.trim());
+    let displayText = text.trim();
+    if (type === 'tel_plain') {
+      type = 'tel';
+      displayText = `tel:${displayText}`;
+    }
+    let typeDisplayName = { url: 'URL', tel: 'Telefon Numarası', email: 'E-posta', text: 'Metin' }[type] || 'Metin';
+    resultType.textContent = typeDisplayName;
+    resultContent.textContent = displayText;
+    createResultButtons(type, displayText);
+    scanResultModal.hidden = false; // Modalı göster
+  }
+
+  async function startCamera() {
+    if (videoStream) return;
+    try {
+      videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      video.srcObject = videoStream;
+      scanning = true;
+      startScanBtn.textContent = 'Kamerayı Kapat';
+      startScanBtn.setAttribute('aria-pressed', 'true');
+      scanQRCodeFromVideo();
+    } catch (err) {
+      alert('Kamera açılırken hata oluştu veya izin verilmedi.');
+    }
+  }
+
+  function stopCamera() {
+    if (!videoStream) return;
+    videoStream.getTracks().forEach(track => track.stop());
+    video.srcObject = null;
+    videoStream = null;
+    scanning = false;
+    startScanBtn.textContent = 'Kamerayı Aç';
+    startScanBtn.setAttribute('aria-pressed', 'false');
+  }
+
+  startScanBtn.addEventListener('click', () => {
+    if (scanning) { stopCamera(); } else { startCamera(); }
+  });
+
+  function scanQRCodeFromVideo() {
+    if (!scanning) return;
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      scanCanvas.width = video.videoWidth;
+      scanCanvas.height = video.videoHeight;
+      scanCtx.drawImage(video, 0, 0, scanCanvas.width, scanCanvas.height);
+      const imageData = scanCtx.getImageData(0, 0, scanCanvas.width, scanCanvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
+      if (code && scanResultModal.hidden) { // Sadece modal kapalıyken yeni sonuç göster
+        displayResult(code.data); 
+      }
+    }
+    requestAnimationFrame(scanQRCodeFromVideo);
+  }
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      scanCanvas.width = img.naturalWidth;
+      scanCanvas.height = img.naturalHeight;
+      scanCtx.drawImage(img, 0, 0);
+      const imageData = scanCtx.getImageData(0, 0, scanCanvas.width, scanCanvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
+      if (code) { displayResult(code.data); } else { alert('QR kod okunamadı. Lütfen net bir görüntü yükleyin.'); }
+      URL.revokeObjectURL(url);
+      fileInput.value = '';
+    };
+    img.onerror = () => { alert('Geçersiz resim dosyası.'); URL.revokeObjectURL(url); fileInput.value = ''; };
+    img.src = url;
+  });
+
+  const openGeneratorBtn = document.getElementById('openGeneratorBtn');
+  const generatorModal = document.getElementById('generatorModal');
+  const modalCloseBtn = generatorModal.querySelector('.modal-close-btn');
+  const textInput = document.getElementById('textInput');
+  const downloadQrBtn = document.getElementById('downloadQrBtn');
+
+  function generateQRCode(text) {
+    if (typeof qrcode === 'undefined') { return; }
+    if (!text) { qrCtx.clearRect(0, 0, qrCanvas.width, qrCanvas.height); downloadQrBtn.style.display = 'none'; return; }
+    try {
+      const qr = qrcode(0, 'M');
+      qr.addData(text);
+      qr.make();
+      const tileW = qrCanvas.width / qr.getModuleCount();
+      const tileH = qrCanvas.height / qr.getModuleCount();
+      qrCtx.clearRect(0, 0, qrCanvas.width, qrCanvas.height);
+      qrCtx.fillStyle = '#ffffff';
+      qrCtx.fillRect(0, 0, qrCanvas.width, qrCanvas.height);
+      qrCtx.fillStyle = '#000000';
+      for (let r = 0; r < qr.getModuleCount(); r++) {
+        for (let c = 0; c < qr.getModuleCount(); c++) {
+          if (qr.isDark(r, c)) {
+            const w = Math.ceil((c + 1) * tileW) - Math.floor(c * tileW);
+            const h = Math.ceil((r + 1) * tileH) - Math.floor(r * tileH);
+            qrCtx.fillRect(Math.round(c * tileW), Math.round(r * tileH), w, h);
+          }
+        }
+      }
+      downloadQrBtn.style.display = 'flex';
+    } catch(e) { console.error("QR code generation failed:", e); qrCtx.clearRect(0, 0, qrCanvas.width, qrCanvas.height); downloadQrBtn.style.display = 'none'; }
+  }
+
+  openGeneratorBtn.addEventListener('click', () => {
+    generatorModal.hidden = false;
+    loadQRCodeLib().then(() => { generateQRCode(textInput.value.trim()); });
+  });
+
+  modalCloseBtn.addEventListener('click', () => { generatorModal.hidden = true; });
+  generatorModal.addEventListener('click', (e) => { if (e.target === generatorModal) { generatorModal.hidden = true; } });
+  textInput.addEventListener('input', (e) => { generateQRCode(e.target.value.trim()); });
+  downloadQrBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'qrcode.png';
+    link.href = qrCanvas.toDataURL('image/png');
+    link.click();
+  });
+
+  loadQRCodeLib().then(() => { downloadQrBtn.style.display = 'none'; });
+
+})();
+</script>
+</body>
+</html>
